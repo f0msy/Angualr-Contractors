@@ -1,0 +1,27 @@
+.grid-columns,
+.grid-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: 1px solid #eee;
+    .grid-field,
+    div {
+        height: 100%;
+        width: 100%;
+        padding: 1rem;
+        &:hover {
+            color: rgb(47, 143, 233);
+            cursor: pointer;
+        }
+    }
+    &:hover {
+        background-color: #eee;
+        cursor: pointer;
+    }
+    a {
+        text-decoration: none;
+        color: black;
+        height: 100%;
+        width: 100%;
+    }
+}

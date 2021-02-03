@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="grid-columns">
+        <div *ngFor="let column of columns">{{column.name}}</div>
+    </div>
+    <div *ngFor="let row of rows" class="grid-row">
+        <a *ngFor="let field of row.fields" routerLink="/card/{{field.contractor}}">
+            <div class="grid-field"><span>{{field.value}}</span></div>
+        </a>
+
+    </div>
+
+</div>
