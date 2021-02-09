@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
-
+import { Location, NgSwitch } from '@angular/common';
 import { ContractorsService } from '../services/contractors.service';
 import { FieldValue } from '../entities/field-value.interface';
+import { FieldsService } from '../services/fields.service';
+
 
 @Component({
   selector: 'app-card',
@@ -17,7 +18,8 @@ export class CardComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private contractorsService: ContractorsService,
-    private location: Location
+    private location: Location,
+    private fieldsService: FieldsService
   ) {}
 
   ngOnInit(): void {
@@ -28,5 +30,12 @@ export class CardComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id')!;
     this.contractorsService.contractorValues(id).subscribe(val => this.fields = val)
   }
+  
+  getFieldType(id: number): string {
+    return this.fieldsService.findFieldInfo(id).type  
+  }
 
+  getFieldName(id: number): string {
+    return this.fieldsService.findFieldInfo(id).name  
+  }
 }

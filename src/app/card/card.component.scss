@@ -1,0 +1,11 @@
+#fields-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    .field {
+        margin: 1rem;
+        label {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}

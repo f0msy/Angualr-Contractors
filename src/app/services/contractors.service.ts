@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, from } from 'rxjs';
-import { find } from 'rxjs/operators'
+import { Observable, of } from 'rxjs';
 import { Contractor } from '../entities/contractor.interface';
 import { FieldValue } from '../entities/field-value.interface';
 import { CONTRACTORS } from '../entities/mock-contractors';

@@ -2,5 +2,25 @@
     <nav>
         <a routerLink="/grid">Back</a>
     </nav>
-    <p *ngFor="let field of fields">{{field.value}}</p>
+    <div id="fields-container">
+        <div *ngFor="let field of fields" [ngSwitch]="getFieldType(field.field)" class="field">
+            <mat-form-field>
+                <label>{{getFieldName(field.field)}}:
+                    <input *ngSwitchCase="'text'" [(ngModel)]="field.value">
+                    <input *ngSwitchCase="'number'" [(ngModel)]="field.value">
+                    <input *ngSwitchCase="'date'" [(ngModel)]="field.value">
+                    <mat-select *ngSwitchCase="'dropdown'" name="contractor-type" [(ngModel)]="field.value">
+                        <mat-option value="Юр. Лицо">Юр. Лицо</mat-option>
+                        <mat-option value="Физ. Лицо">Физ. Лицо</mat-option>
+                        <mat-option value="Иностранный агент">Иностранный агент</mat-option>
+                        <mat-option value="ИП">ИП</mat-option>
+                    </mat-select>
+                    <p *NgSwitchDefault>Хуй</p>
+                </label>
+            </mat-form-field>
+
+
+        </div>
+    </div>
+
 </div>
