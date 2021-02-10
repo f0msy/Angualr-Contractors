@@ -5,21 +5,18 @@
     <div id="fields-container">
         <div *ngFor="let field of fields" [ngSwitch]="getFieldType(field.field)" class="field">
             <mat-form-field>
-                <label>{{getFieldName(field.field)}}:
-                    <input *ngSwitchCase="'text'" [(ngModel)]="field.value">
-                    <input *ngSwitchCase="'number'" [(ngModel)]="field.value">
-                    <input *ngSwitchCase="'date'" [(ngModel)]="field.value">
-                    <mat-select *ngSwitchCase="'dropdown'" name="contractor-type" [(ngModel)]="field.value">
-                        <mat-option value="Юр. Лицо">Юр. Лицо</mat-option>
-                        <mat-option value="Физ. Лицо">Физ. Лицо</mat-option>
-                        <mat-option value="Иностранный агент">Иностранный агент</mat-option>
-                        <mat-option value="ИП">ИП</mat-option>
-                    </mat-select>
-                    <p *NgSwitchDefault>Хуй</p>
-                </label>
+                <mat-label>{{getFieldName(field.field)}}:</mat-label>
+                <input matInput *ngSwitchCase="'text'" [(ngModel)]="field.value">
+                <input matInput *ngSwitchCase="'number'" [(ngModel)]="field.value">
+                <input matInput *ngSwitchCase="'date'" [(ngModel)]="field.value">
+                <mat-select placeholder="Select" *ngSwitchCase="'dropdown'" name="contractor-type" [(ngModel)]="field.value">
+                    <mat-option value="Юр. Лицо">Юр. Лицо</mat-option>
+                    <mat-option value="Физ. Лицо">Физ. Лицо</mat-option>
+                    <mat-option value="Иностранный агент">Иностранный агент</mat-option>
+                    <mat-option value="ИП">ИП</mat-option>
+                </mat-select>
+                <p *NgSwitchDefault>Хуй</p>
             </mat-form-field>
-
-
         </div>
     </div>
 
