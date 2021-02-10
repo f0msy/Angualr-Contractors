@@ -40,22 +40,16 @@ export class GridTableComponent implements OnInit {
   }
 
   genRows(): void {
-    let fieldIDs: any = [];
-    this.columns.map(val => fieldIDs.push(val.field));
+    let fieldIDs: any = this.columns.map(val => val.field);   
     
     this.contractors.map(c => {
-      let abc: FieldValue[] = this.values;   
-      abc = abc.filter(val => fieldIDs.includes(val.field)).filter(val => val.contractor == c.id);
+      let fields: FieldValue[] = this.values.filter(val => fieldIDs.includes(val.field) && val.contractor == c.id);
 
-      let obj: any = {
-        contractor: 1,
-        fields: []
-      }
+      this.rows.push({
+        contractor: c.id,
+        fields
+      }); 
 
-      obj.contractor = c.id;
-      obj.fields = abc;
-
-      this.rows.push(obj);      
     })   
   }
 }
