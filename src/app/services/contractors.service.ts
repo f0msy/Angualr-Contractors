@@ -4,13 +4,18 @@ import { Contractor } from '../entities/contractor.interface';
 import { FieldValue } from '../entities/field-value.interface';
 import { CONTRACTORS } from '../entities/mock-contractors';
 import { FieldValues } from '../entities/mock-field-values'
+import { UtilsService } from './utils.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContractorsService {  
 
-  constructor() { }
+  constructor(private utils: UtilsService) {
+    CONTRACTORS.forEach(value => {     
+      this.utils.sendData(`contractors/${value.id}`, value)
+    })
+   }
 
   getContractors(): Observable<Contractor[]> {
     return of(CONTRACTORS);

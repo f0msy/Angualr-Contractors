@@ -1,4 +1,3 @@
-import { Type } from "@angular/core";
 import { Field } from "./field.interface";
 import { Types } from './types'
 

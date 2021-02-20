@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { GridTableComponent } from './grid-table/grid-table.component';
 import { GridControlsComponent } from './grid-controls/grid-controls.component';
 import { CardComponent } from './card/card.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CardComponent } from './card/card.component';
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

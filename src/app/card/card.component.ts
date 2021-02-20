@@ -18,7 +18,6 @@ export class CardComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private contractorsService: ContractorsService,
-    private location: Location,
     private fieldsService: FieldsService
   ) {}
 
@@ -37,5 +36,14 @@ export class CardComponent implements OnInit {
 
   getFieldName(id: number): string {
     return this.fieldsService.findFieldInfo(id).name  
+  }
+
+  submit() {
+    this.fields.forEach(v => {
+      this.fieldsService.addFieldValue(v).subscribe(v => {
+        this.getFields()   
+      }, err => console.error(err)
+      )
+    })
   }
 }
