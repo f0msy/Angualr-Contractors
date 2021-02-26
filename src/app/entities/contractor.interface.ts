@@ -1,6 +1,6 @@
-import { Field } from './field.interface'
+import { FieldValue } from './field-value.interface'
 
 export interface Contractor {
     id: number;
-    fields: Field[];
+    fields: FieldValue[];
 }

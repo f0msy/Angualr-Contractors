@@ -1,0 +1,10 @@
+#fields-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    mat-form-field {
+        margin: 1rem;
+    }
+    mat-label {
+        color: #313031;
+    }
+}

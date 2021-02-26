@@ -1,6 +1,7 @@
+import { Field } from "./field.interface";
+
 export interface Column {
     id: number;
-    field: number;
-    name: string;
+    field: Field;
     sorted: boolean;
 }

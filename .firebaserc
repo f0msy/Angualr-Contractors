@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "angular-grid-8f2c6"
+  },
+  "targets": {
+    "angular-grid-8f2c6": {
+      "hosting": {
+        "grid": [
+          "angular-grid-8f2c6"
+        ]
+      }
+    }
   }
 }

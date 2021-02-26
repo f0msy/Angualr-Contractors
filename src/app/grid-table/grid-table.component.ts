@@ -5,9 +5,7 @@ import { FieldValue } from '../entities/field-value.interface';
 import { Column } from '../entities/column.interface';
 import { Contractor } from '../entities/contractor.interface';
 
-import { ValuesService } from '../services/values.service';
-import { ContractorsService } from '../services/contractors.service';
-
+import { FieldsService } from '../services/fields.service';
 
 @Component({
   selector: 'app-grid-table',
@@ -18,38 +16,37 @@ import { ContractorsService } from '../services/contractors.service';
 export class GridTableComponent implements OnInit {
   columns: Column[]  = COLUMNS;
   values: FieldValue[] = [];
-  contractors: Contractor[] = [];
+  contractors!: Contractor[];
   rows: any = [];
 
-  constructor(private valuesService: ValuesService, private contractorsService: ContractorsService) { }
+  constructor(
+    private fieldsService: FieldsService
+    ) {}
 
   ngOnInit(): void {
-    this.getGridRows();
     this.getContractors();
-    this.genRows();
   }
 
-  getGridRows(): void {
-    this.valuesService.getFieldValues()
-        .subscribe(values => this.values = values);
-  }
 
   getContractors(): void {
-    this.contractorsService.getContractors()
-        .subscribe(contractors => this.contractors = contractors);
+    this.fieldsService.getValuesList().valueChanges().subscribe(v => {
+      this.contractors = v;
+      this.genRows();
+      console.log(v);
+      
+    })   
   }
 
   genRows(): void {
-    let fieldIDs: any = this.columns.map(val => val.field);   
+    let fieldIDs: any = this.columns.map(val => val.field.id);   
     
     this.contractors.map(c => {
-      let fields: FieldValue[] = this.values.filter(val => fieldIDs.includes(val.field) && val.contractor == c.id);
-
+      let fields: FieldValue[] = c.fields.filter(val => fieldIDs.includes(val.field.id));
+      
       this.rows.push({
         contractor: c.id,
         fields
       }); 
-
     })   
   }
 }

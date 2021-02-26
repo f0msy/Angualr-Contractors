@@ -13,13 +13,17 @@ import { GridTableComponent } from './grid-table/grid-table.component';
 import { GridControlsComponent } from './grid-controls/grid-controls.component';
 import { CardComponent } from './card/card.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CreatorComponent } from './creator/creator.component';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
     AppComponent,
     GridTableComponent,
     GridControlsComponent,
-    CardComponent
+    CardComponent,
+    CreatorComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment)
   ],
   providers: [],
   bootstrap: [AppComponent]

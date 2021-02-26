@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location, NgSwitch } from '@angular/common';
-import { ContractorsService } from '../services/contractors.service';
 import { FieldValue } from '../entities/field-value.interface';
 import { FieldsService } from '../services/fields.service';
-
+import { AngularFireObject } from "@angular/fire/database"
+import { Field } from '../entities/field.interface'
+import { Contractor } from '../entities/contractor.interface';
 
 @Component({
   selector: 'app-card',
@@ -14,10 +14,10 @@ import { FieldsService } from '../services/fields.service';
 
 export class CardComponent implements OnInit {
   fields: FieldValue[] = []
+  contractor!: Contractor
 
   constructor(
     private route: ActivatedRoute,
-    private contractorsService: ContractorsService,
     private fieldsService: FieldsService
   ) {}
 
@@ -27,23 +27,17 @@ export class CardComponent implements OnInit {
 
   getFields(): void {    
     const id = +this.route.snapshot.paramMap.get('id')!;
-    this.contractorsService.contractorValues(id).subscribe(val => this.fields = val)
-  }
-  
-  getFieldType(id: number): string {
-    return this.fieldsService.findFieldInfo(id).type  
-  }
+    // this.contractorsService.contractorValues(id).subscribe(val => this.fields = val.fields)
+    this.fieldsService.getValue(id)
+    console.log(this.fieldsService.value);
 
-  getFieldName(id: number): string {
-    return this.fieldsService.findFieldInfo(id).name  
   }
 
   submit() {
-    this.fields.forEach(v => {
-      this.fieldsService.addFieldValue(v).subscribe(v => {
-        this.getFields()   
-      }, err => console.error(err)
-      )
-    })
+      console.log(this.fieldsService.getValuesList())
+  }
+
+  deleteItems() {
+    this.fieldsService.deleteAll()
   }
 }

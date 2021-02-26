@@ -3,7 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiKey: "AIzaSyBm1PSe3wsRyYpe-H2AIFLCQ2UvT2dsS0g",
+    authDomain: "angular-grid-8f2c6.firebaseapp.com",
+    databaseURL: "https://angular-grid-8f2c6-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "angular-grid-8f2c6",
+    storageBucket: "angular-grid-8f2c6.appspot.com",
+    messagingSenderId: "997560904631",
+    appId: "1:997560904631:web:13e5b52480fb3815c81632"
 };
 
 /*

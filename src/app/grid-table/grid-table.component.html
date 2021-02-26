@@ -1,11 +1,11 @@
 <div class="container">
+    <app-grid-controls></app-grid-controls>
     <div class="grid-columns">
-        <div *ngFor="let column of columns">{{column.name}}</div>
+        <div *ngFor="let column of columns">{{column.field.name}}</div>
     </div>
     <div *ngFor="let row of rows" class="grid-row">
-        <a *ngFor="let field of row.fields" routerLink="/card/{{field.contractor}}">
+        <a *ngFor="let field of row.fields" routerLink="/card/{{row.contractor}}">
             <div class="grid-field"><span>{{field.value}}</span></div>
         </a>
-
     </div>
 </div>

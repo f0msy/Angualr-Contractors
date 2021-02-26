@@ -1,7 +1,7 @@
+import { Field } from "./field.interface";
+
 export interface FieldValue {
-    id: number;
-    field: number;
-    contractor: number;
+    field: Field;
     value?: any;
     changeDate?: Date;
     changeUser?: number;
