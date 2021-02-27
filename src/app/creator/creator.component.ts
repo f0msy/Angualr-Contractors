@@ -39,5 +39,6 @@ export class CreatorComponent implements OnInit {
 
   submit() {
       this.fieldsService.createValue(this.contractor)
+      window.document.location.href = "/grid"
   }
 }

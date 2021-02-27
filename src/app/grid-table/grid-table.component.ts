@@ -18,7 +18,7 @@ export class GridTableComponent implements OnInit {
   values: FieldValue[] = [];
   contractors!: Contractor[];
   rows: any = [];
-
+  
   constructor(
     private fieldsService: FieldsService
     ) {}
@@ -29,11 +29,21 @@ export class GridTableComponent implements OnInit {
 
 
   getContractors(): void {
+    let buffer: any = []
+    this.fieldsService.getValuesList().query.once("value", function(v) {
+      v.forEach(e =>{ 
+        let obj = {
+          id: e.key,
+          fields: e.val().fields
+        }
+        buffer.push(obj)
+      });  
+    })
+    
+     
     this.fieldsService.getValuesList().valueChanges().subscribe(v => {
-      this.contractors = v;
+      this.contractors = buffer;
       this.genRows();
-      console.log(v);
-      
     })   
   }
 
@@ -48,5 +58,10 @@ export class GridTableComponent implements OnInit {
         fields
       }); 
     })   
+  }
+
+  delete(v: string) {
+    this.fieldsService.deleteValue(v)   
+    window.document.location.reload()
   }
 }

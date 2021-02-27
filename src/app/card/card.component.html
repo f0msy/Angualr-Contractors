@@ -1,23 +1,25 @@
 <div id="card">
-    <nav>
-        <a routerLink="/grid">Back</a>
-    </nav>
+    <div class="nav-bar">
+        <nav>
+            <a routerLink="/grid">Back</a>
+        </nav>
+    </div>
     <div id="fields-container">
-        <div *ngFor="let field of fields" [ngSwitch]="field.field.type" class="field">
-            <mat-form-field>
-                <mat-label>{{field.field.name}}:</mat-label>
-                <input matInput *ngSwitchCase="'text'" [(ngModel)]="field.value">
-                <input matInput *ngSwitchCase="'number'" [(ngModel)]="field.value">
-                <input matInput *ngSwitchCase="'date'" [(ngModel)]="field.value">
-                <mat-select placeholder="Select" *ngSwitchCase="'dropdown'" name="contractor-type" [(ngModel)]="field.value">
-                    <mat-option value="Юр. Лицо">Юр. Лицо</mat-option>
-                    <mat-option value="Физ. Лицо">Физ. Лицо</mat-option>
-                    <mat-option value="Иностранный агент">Иностранный агент</mat-option>
-                    <mat-option value="ИП">ИП</mat-option>
-                </mat-select>
-                <p *NgSwitchDefault>Хуй</p>
-            </mat-form-field>
+        <div *ngFor="let field of contractor.fields" [ngSwitch]="field.field.type" class="field">
+            <label class="pure-material-textfield-outlined">
+                <input *ngSwitchCase="'text'" [(ngModel)]="field.value" placeholder=" ">
+                <input *ngSwitchCase="'number'" [(ngModel)]="field.value" placeholder=" ">
+                <input *ngSwitchCase="'date'" [(ngModel)]="field.value" placeholder=" ">
+                <span>{{field.field.name}}</span>
+            </label>
+            <select class="pure-material-textfield-outlined" placeholder="Select" *ngSwitchCase="'dropdown'" name="contractor-type" [(ngModel)]="field.value">
+                    <option value="Юр. Лицо">Юр. Лицо</option>
+                    <option value="Физ. Лицо">Физ. Лицо</option>
+                    <option value="Иностранный агент">Иностранный агент</option>
+                    <option value="ИП">ИП</option>
+                </select>
+            <p *NgSwitchDefault>Хуй</p>
         </div>
     </div>
-    <button (click)="submit()">Submit</button>
+    <button class="pure-material-button-contained form-button" (click)="submit()">Submit</button>
 </div>

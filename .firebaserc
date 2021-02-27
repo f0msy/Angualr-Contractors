@@ -8,6 +8,11 @@
         "grid": [
           "angular-grid-8f2c6"
         ]
+      },
+      "database": {
+        "angular-grid-8f2c6": [
+          "angular-grid-8f2c6-default-rtdb"
+        ]
       }
     }
   }

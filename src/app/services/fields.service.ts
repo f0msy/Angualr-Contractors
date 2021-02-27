@@ -1,13 +1,8 @@
 import { Injectable } from '@angular/core';
 import { FIELDS } from '../entities/mock-fields'
 import { Field } from '../entities/field.interface'
-import { FieldValue } from '../entities/field-value.interface'
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { DatabaseService } from './database.service';
-import {AngularFireList, AngularFireObject, AngularFireDatabase, QueryFn} from "@angular/fire/database"
+import {AngularFireList, AngularFireObject, AngularFireDatabase} from "@angular/fire/database"
 import { Contractor } from '../entities/contractor.interface';
-import { Reference } from '@angular/compiler/src/render3/r3_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -19,19 +14,13 @@ export class FieldsService {
   value!: AngularFireObject<Contractor>
   contractors!: Contractor
   constructor(
-    private http: HttpClient,
-    private database: DatabaseService,
     private db: AngularFireDatabase
     ) {
-        this.getValuesList()        
+        this.getValuesList()     
     }
 
   findFieldInfo(id: number): Field {
     return (FIELDS.find(v => v.id === id)!)
-  }
-
-  addFieldValue(value: FieldValue[]): Observable<FieldValue[]> {   
-    return this.http.post<FieldValue[]>(`${this.database.url}${this.basePath}.json`, value)
   }
 
   getValuesList(): AngularFireList<Contractor> {
@@ -39,17 +28,9 @@ export class FieldsService {
     return this.values
   }
 
-  getValue(id: any): AngularFireObject<Contractor> {
-    let res: any
-    this.db.object(this.basePath)
-        .query
-        .orderByChild("id")
-        .equalTo(id)
-        .on('value', function(snapshot) {        
-          res = snapshot.val() 
-        })        
-    this.value = res
-    return this.value
+  getValue(key: string): AngularFireObject<Contractor> {      
+      this.value = this.db.object(`${this.basePath}/${key}`)
+      return this.value
   }
 
   createValue(value: Contractor): void  {
@@ -59,12 +40,14 @@ export class FieldsService {
 
 
   updateValue(key: string, value: any): void {
-    this.values.update(key, value)
+    let obj = this.db.database.ref(`${this.basePath}/${key}`)
+    this.values.update(obj, value)
       .catch(error => this.handleError(error))
   }
 
   deleteValue(key: string): void {
-      this.values.remove(key)
+    let obj = this.db.database.ref(`${this.basePath}/${key}`)
+      this.values.remove(obj)
         .catch(error => this.handleError(error))
   }
 

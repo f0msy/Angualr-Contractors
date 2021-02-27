@@ -1,10 +1,15 @@
 #fields-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    mat-form-field {
-        margin: 1rem;
+    .field {
+        margin: 20px;
+        display: flex;
+        flex-direction: column;
+        font-weight: 500;
     }
-    mat-label {
-        color: #313031;
-    }
+}
+
+.form-button {
+    margin: 20px;
+    float: left
 }

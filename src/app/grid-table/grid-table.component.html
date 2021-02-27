@@ -2,10 +2,12 @@
     <app-grid-controls></app-grid-controls>
     <div class="grid-columns">
         <div *ngFor="let column of columns">{{column.field.name}}</div>
+        <div></div>
     </div>
     <div *ngFor="let row of rows" class="grid-row">
         <a *ngFor="let field of row.fields" routerLink="/card/{{row.contractor}}">
             <div class="grid-field"><span>{{field.value}}</span></div>
         </a>
+        <div class="grid-field"><button class="pure-material-button-contained" (click)="delete(row.contractor) ">Delete</button></div>
     </div>
 </div>
