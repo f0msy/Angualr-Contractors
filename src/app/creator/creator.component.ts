@@ -3,6 +3,7 @@ import { FieldValue } from '../entities/field-value.interface';
 import { FieldsService } from '../services/fields.service';
 import { Contractor } from '../entities/contractor.interface';
 import { FIELDS } from '../entities/mock-fields'
+
 @Component({
   selector: 'app-creator',
   templateUrl: './creator.component.html',

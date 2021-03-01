@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FieldValue } from '../entities/field-value.interface';
 import { FieldsService } from '../services/fields.service';
-import { AngularFireObject } from "@angular/fire/database"
-import { Field } from '../entities/field.interface'
 import { Contractor } from '../entities/contractor.interface';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { ThrowStmt } from '@angular/compiler';
+import { FIELDS } from '../entities/mock-fields'
 
 @Component({
   selector: 'app-card',
@@ -17,33 +12,62 @@ import { ThrowStmt } from '@angular/compiler';
 
 export class CardComponent implements OnInit {
   contractor!: Contractor
-  
   constructor(
     private route: ActivatedRoute,
-    private fieldsService: FieldsService
+    private fieldsService: FieldsService,
   ) {}
 
   ngOnInit(): void {
     this.getFields()
   }
 
-  getFields(): void {    
-    const id = this.route.snapshot.paramMap.get('id')!;
+  getCotractor(): Contractor {
     let buffer: Contractor
+    const id = this.route.snapshot.paramMap.get('id')!;
+
     this.fieldsService.getValue(id).query.once("value", function(s) {
+      console.log(s.val());
+
+      function addFields (obj: Contractor): Contractor {
+        let fieldsArray: number[] = []
+        obj.fields.forEach(e => {
+          fieldsArray.push(e.field.id)
+        })
+
+        FIELDS.forEach(v => {
+          if(!fieldsArray.includes(v.id))                
+            obj.fields.push(
+              {
+                field: v,
+                value: ""
+              }
+            )
+        })
+
+        return obj 
+      }
+
       buffer = {
         id: s.key!.toString(),
         fields: s.val().fields
-      } 
+      }
+      buffer = addFields(buffer)
     })
-
-    this.fieldsService.getValue(id).valueChanges().subscribe(v => {  
-      this.contractor = buffer
-    })
+    return buffer!
   }
-  
+
+  getFields(): void {
+    const id = this.route.snapshot.paramMap.get('id')!;
+    
+    this.fieldsService.getValue(id).valueChanges().subscribe(v => {    
+      let buffer: Contractor = this.getCotractor()
+        this.contractor = buffer
+    })  
+
+  }
 
   submit() {
     this.fieldsService.updateValue(this.contractor.id.toString(), this.contractor)
   }
 }
+

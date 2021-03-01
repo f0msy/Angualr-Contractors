@@ -1,45 +1,37 @@
 {
-  "database": {
-    "rules": "database.rules.json"
-  },
-  "hosting": [
-    {
-      "public": "dist/grid",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**"
-      ],
-      "rewrites": [
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
-      ]
+    "database": {
+        "rules": "database.rules.json"
     },
-    {
-      "target": "grid",
-      "public": "dist/grid",
-      "ignore": [
-        "**/.*"
-      ],
-      "headers": [
+    "hosting": [{
+            "public": "dist/grid",
+            "target": "angular-grid-8f2c6",
+            "ignore": [
+                "firebase.json",
+                "**/.*",
+                "**/node_modules/**"
+            ],
+            "rewrites": [{
+                "source": "**",
+                "destination": "/index.html"
+            }]
+        },
         {
-          "source": "*.[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].+(css|js)",
-          "headers": [
-            {
-              "key": "Cache-Control",
-              "value": "public,max-age=31536000,immutable"
-            }
-          ]
+            "target": "angular-grid-8f2c6",
+            "public": "dist/grid",
+            "ignore": [
+                "**/.*"
+            ],
+            "headers": [{
+                "source": "*.[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].+(css|js)",
+                "headers": [{
+                    "key": "Cache-Control",
+                    "value": "public,max-age=31536000,immutable"
+                }]
+            }],
+            "rewrites": [{
+                "source": "**",
+                "destination": "/index.html"
+            }]
         }
-      ],
-      "rewrites": [
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
-      ]
-    }
-  ]
+    ]
 }

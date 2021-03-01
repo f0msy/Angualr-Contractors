@@ -15,7 +15,6 @@ import { FieldsService } from '../services/fields.service';
 
 export class GridTableComponent implements OnInit {
   columns: Column[]  = COLUMNS;
-  values: FieldValue[] = [];
   contractors!: Contractor[];
   rows: any = [];
   
