@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CreatorComponent } from './creator/creator.component';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { environment } from 'src/environments/environment';
     GridTableComponent,
     GridControlsComponent,
     CardComponent,
-    CreatorComponent
+    CreatorComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,

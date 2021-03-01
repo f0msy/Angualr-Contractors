@@ -6,6 +6,7 @@ import { Column } from '../entities/column.interface';
 import { Contractor } from '../entities/contractor.interface';
 
 import { FieldsService } from '../services/fields.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-grid-table',
@@ -19,11 +20,13 @@ export class GridTableComponent implements OnInit {
   rows: any = [];
   
   constructor(
-    private fieldsService: FieldsService
+    private fieldsService: FieldsService,
+    private auth: AuthService
     ) {}
 
   ngOnInit(): void {
     this.getContractors();
+    this.auth.redirect();
   }
 
 
@@ -42,6 +45,7 @@ export class GridTableComponent implements OnInit {
      
     this.fieldsService.getValuesList().valueChanges().subscribe(v => {
       this.contractors = buffer;
+      if(this.rows.length == 0)
       this.genRows();
     })   
   }

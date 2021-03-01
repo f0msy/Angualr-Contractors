@@ -3,6 +3,7 @@ import { FieldValue } from '../entities/field-value.interface';
 import { FieldsService } from '../services/fields.service';
 import { Contractor } from '../entities/contractor.interface';
 import { FIELDS } from '../entities/mock-fields'
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-creator',
@@ -14,11 +15,13 @@ export class CreatorComponent implements OnInit {
   contractor!: Contractor
 
   constructor(
-    private fieldsService: FieldsService
+    private fieldsService: FieldsService,
+    private auth: AuthService
   ) { }
 
   ngOnInit(): void {
     this.getFields()  
+    this.auth.redirect()
   }
   getFields(): void {    
       FIELDS.forEach(v => {

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FieldsService } from '../services/fields.service';
 import { Contractor } from '../entities/contractor.interface';
 import { FIELDS } from '../entities/mock-fields'
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-card',
@@ -15,10 +16,12 @@ export class CardComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private fieldsService: FieldsService,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {
     this.getFields()
+    this.auth.redirect()
   }
 
   getCotractor(): Contractor {
