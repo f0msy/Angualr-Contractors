@@ -42,9 +42,10 @@ export class AuthComponent implements OnInit {
       else if (err.code == "auth/invalid-email"){
         console.error("Wrong credentials data format")
         alert("Неверный формат почтового ящика")
-      } else if (err.code == "auth/weak-password"){
+      } 
+      else if (err.code == "auth/weak-password"){
         console.error("Weak password")
-        alert("Слишком короткий пароль. Пароль должен быть не менее 6 символов.")
+        alert("Пароль должен быть не менее 6 символов.")
       }
     })
   }
