@@ -4,6 +4,7 @@ import { FieldsService } from '../services/fields.service';
 import { Contractor } from '../entities/contractor.interface';
 import { FIELDS } from '../entities/mock-fields'
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-creator',
@@ -16,7 +17,8 @@ export class CreatorComponent implements OnInit {
 
   constructor(
     private fieldsService: FieldsService,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -43,6 +45,6 @@ export class CreatorComponent implements OnInit {
 
   submit() {
       this.fieldsService.createValue(this.contractor)
-      window.document.location.href = "/grid"
+      this.router.navigate(['/grid'])
   }
 }
